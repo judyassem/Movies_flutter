@@ -7,6 +7,7 @@ class CustomeFilledButton extends StatelessWidget {
   final double textFontSize;
   final Color textColor;
   final WidgetStateProperty<Color?>? backgroundColor;
+  final void Function() onClick;
 
   const CustomeFilledButton(
       {super.key,
@@ -14,7 +15,7 @@ class CustomeFilledButton extends StatelessWidget {
       this.icon,
       required this.textFontSize,
       required this.textColor,
-      required this.backgroundColor});
+      required this.backgroundColor, required this.onClick});
 
   @override
   Widget build(BuildContext context) {
@@ -26,7 +27,9 @@ class CustomeFilledButton extends StatelessWidget {
                 borderRadius: BorderRadius.circular(16))),
             backgroundColor: backgroundColor,
           ),
-          onPressed: () {},
+          onPressed: () {
+            onClick();
+          },
           child: Row(
             mainAxisAlignment: MainAxisAlignment.center,
             crossAxisAlignment: CrossAxisAlignment.center,

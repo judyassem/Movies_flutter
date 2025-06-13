@@ -6,9 +6,10 @@ class CustomTextField extends StatelessWidget {
   final String hintText;
   final IconData preIcon;
   final IconData? sufIcon;
+  final TextEditingController? controller;
 
   const CustomTextField(
-      {super.key, required this.hintText, required this.preIcon, this.sufIcon});
+      {super.key, required this.hintText, required this.preIcon, this.sufIcon, this.controller});
 
   @override
   Widget build(BuildContext context) {
@@ -17,6 +18,7 @@ class CustomTextField extends StatelessWidget {
       child: Padding(
         padding: const EdgeInsets.only(top: 10, bottom: 10),
         child: TextFormField(
+          controller: controller,
           textAlign: TextAlign.justify,
           decoration: InputDecoration(
             focusedBorder: OutlineInputBorder(

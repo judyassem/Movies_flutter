@@ -42,6 +42,7 @@ class ForgetpasswordScreen extends StatelessWidget {
             preIcon: Icons.mail,
           ),
           CustomeFilledButton(
+            onClick: (){},
               text: "Verify Email",
               textFontSize: 20,
               textColor: AppColors.black,
