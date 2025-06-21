@@ -1,9 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:movies_app/common%20_widget/filled_button.dart';
-import 'package:movies_app/screens_ui/login_screen/login_screen.dart';
+
 import 'package:movies_app/util/app_colors.dart';
 
-import '../../common _widget/custometextfilled.dart';
+import '../../../common _widget/custometextfilled.dart';
+import '../login_screen/login_screen.dart';
 
 class RegisterScreen extends StatelessWidget {
   static String routeName = "RegisterScreen";

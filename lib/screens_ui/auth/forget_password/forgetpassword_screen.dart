@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:movies_app/common%20_widget/filled_button.dart';
 import 'package:movies_app/util/app_colors.dart';
 
-import '../../common _widget/custometextfilled.dart';
+import '../../../common _widget/custometextfilled.dart';
 
 class ForgetpasswordScreen extends StatelessWidget {
   static String routeName = "forget Password";

@@ -2,8 +2,9 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:movies_app/common%20_widget/custometextfilled.dart';
 import 'package:movies_app/common%20_widget/filled_button.dart';
-import 'package:movies_app/screens_ui/forget_password/forgetpassword_screen.dart';
-import 'package:movies_app/screens_ui/register_screen/register.dart';
+import 'package:movies_app/screens_ui/auth/forget_password/forgetpassword_screen.dart';
+import 'package:movies_app/screens_ui/auth/register_screen/register.dart';
+
 import 'package:movies_app/util/app_colors.dart';
 
 class LoginScreen extends StatelessWidget {
