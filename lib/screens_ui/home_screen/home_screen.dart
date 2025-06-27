@@ -1,10 +1,10 @@
 import 'package:flutter/material.dart';
+import 'package:movies_app/screens_ui/profile_tab/profile_tab.dart';
 
 import 'package:movies_app/util/app_colors.dart';
 
 import '../tabs/browes_screen/browese_screen.dart';
 import '../tabs/home_tap/home_tab.dart';
-import '../tabs/profile_screen/profile_screen.dart';
 import '../tabs/search_screen/search_tap.dart';
 
 class HomeScreen extends StatefulWidget {
@@ -33,7 +33,7 @@ class _HomeScreenState extends State<HomeScreen> {
     HomeTab(),
     SearchTap(),
     BroweseScreen(),
-    ProfileScreen()
+    ProfileTab()
   ];
   int currentIndex = 0;
 

@@ -1,21 +1,21 @@
 import 'dart:convert';
-
 import 'package:http/http.dart';
 import 'package:movies_app/models/register_user_response.dart';
 import 'package:movies_app/models/user_dm.dart';
-
 import '../models/login_user_response.dart';
+import '../util/token_utils.dart';
 
-class ApiManager{
+class AuthApiManager{
 
-  var baseUrl = "https://route-movie-apis.vercel.app/";
+  var authBaseUrl = "https://route-movie-apis.vercel.app/";
   var registerEndpoint = "auth/register";
   var loginEndpoint = "auth/login";
+  var profileEndpoint = "profile";
   var defaultErrorMessage = "Something went wrong";
 
   Future<RegisterUserResponse?> registerUser(UserDm user) async {
     try {
-      Uri url = Uri.parse("$baseUrl$registerEndpoint");
+      Uri url = Uri.parse("$authBaseUrl$registerEndpoint");
       final response = await post(
         url,
         headers: {'Content-Type': 'application/json'},
@@ -35,9 +35,8 @@ class ApiManager{
     }
   }
 
-
   Future<LoginUserResponse?> loginUser(String email, String password) async {
-    Uri url = Uri.parse("$baseUrl$loginEndpoint");
+    Uri url = Uri.parse("$authBaseUrl$loginEndpoint");
     try {
       var response = await post(
         url,
@@ -57,6 +56,39 @@ class ApiManager{
       }
     } catch (e) {
       rethrow;
+    }
+  }
+
+  Future<RegisterUserResponse?> getProfile() async {
+    Uri url = Uri.parse("$authBaseUrl$profileEndpoint");
+
+    try {
+      final token = await getToken(); // retrieve the token
+      if (token == null) {
+        print("❌ No token found");
+        return null;
+      }
+
+      final response = await get(
+        url,
+        headers: {
+          "Content-Type": "application/json",
+          "Authorization": "Bearer $token",
+        },
+      );
+
+      print("👤 Profile Status: ${response.statusCode}");
+      print("👤 Profile Body: ${response.body}");
+
+      if (response.statusCode == 200) {
+        final json = jsonDecode(response.body);
+        return RegisterUserResponse.fromJson(json);
+      } else {
+        throw "Failed to load profile: ${response.statusCode}";
+      }
+    } catch (e) {
+      print("Get Profile Error: $e");
+      return null;
     }
   }
 

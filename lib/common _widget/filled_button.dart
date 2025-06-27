@@ -1,21 +1,21 @@
 import 'package:flutter/material.dart';
-import 'package:movies_app/util/app_colors.dart';
 
-class CustomeFilledButton extends StatelessWidget {
+class CustomFilledButton extends StatelessWidget {
   final String text;
   final IconData? icon;
   final double textFontSize;
   final Color textColor;
+  final Color? iconColor;
   final WidgetStateProperty<Color?>? backgroundColor;
   final void Function() onClick;
 
-  const CustomeFilledButton(
+  const CustomFilledButton(
       {super.key,
       required this.text,
       this.icon,
       required this.textFontSize,
       required this.textColor,
-      required this.backgroundColor, required this.onClick});
+      required this.backgroundColor, required this.onClick, this.iconColor});
 
   @override
   Widget build(BuildContext context) {
@@ -37,7 +37,7 @@ class CustomeFilledButton extends StatelessWidget {
               SizedBox(
                 child: Icon(
                   icon,
-                  color: AppColors.black,
+                  color: iconColor,
                   size: 30,
                 ),
               ),

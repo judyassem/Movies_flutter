@@ -4,8 +4,9 @@ class LoginUserResponse {
 
   LoginUserResponse({this.message, this.data});
 
-  LoginUserResponse.fromJson(Map<String, dynamic> json) {
-    message = json['message'];
-    data = json['data']; // Token string
-  }
+   LoginUserResponse.fromJson(Map<String, dynamic> json) {
+     final msg = json['message'];
+     message = msg is List ? msg.join(', ') : msg?.toString();
+     data = json['data']?.toString();
+   }
 }

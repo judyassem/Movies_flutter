@@ -1,15 +1,13 @@
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:movies_app/common%20_widget/custometextfilled.dart';
 import 'package:movies_app/common%20_widget/filled_button.dart';
-import 'package:movies_app/screens_ui/forget_password/forgetpassword_screen.dart';
-import 'package:movies_app/screens_ui/homescreen.dart';
-import 'package:movies_app/screens_ui/register_screen/register.dart';
 import 'package:movies_app/util/app_colors.dart';
-
-import '../../api_manager/api_manager.dart';
-import '../../util/dailog_utils.dart';
-import '../../util/token_utils.dart';
+import '../../../api_manager/auth_api_manager.dart';
+import '../../../util/dailog_utils.dart';
+import '../../../util/token_utils.dart';
+import '../../home_screen/home_screen.dart';
+import '../forget_password/forgetpassword_screen.dart';
+import '../register_screen/register.dart';
 
 class LoginScreen extends StatefulWidget {
   static String routeName = "LoginScreen";
@@ -44,8 +42,8 @@ class _LoginScreenState extends State<LoginScreen> {
     );
   }
 
-  CustomeFilledButton buildGoogleLoginButton() {
-    return CustomeFilledButton(
+  CustomFilledButton buildGoogleLoginButton() {
+    return CustomFilledButton(
           onClick: (){},
           backgroundColor: WidgetStatePropertyAll(AppColors.yellow),
           icon: Icons.g_mobiledata_rounded,
@@ -133,8 +131,8 @@ class _LoginScreenState extends State<LoginScreen> {
         );
   }
 
-  CustomeFilledButton buildLoginButton(BuildContext context) {
-    return CustomeFilledButton(
+  CustomFilledButton buildLoginButton(BuildContext context) {
+    return CustomFilledButton(
           onClick: () async {
             try {
               showLoading(context);
@@ -148,13 +146,13 @@ class _LoginScreenState extends State<LoginScreen> {
                 return;
               }
 
-              final response = await ApiManager().loginUser(email, password);
+              final response = await AuthApiManager().loginUser(email, password);
 
               hideLoading(context);
 
               if (response != null && response.data != null) {
                 await saveToken(response.data!);
-                await showMessage(message: response?.message ?? "success", context: context, posActionText: "continue");
+                await showMessage(message: response.message ?? "success", context: context, posActionText: "continue");
                 Navigator.pushReplacementNamed(context, HomeScreen.routeName);
               } else {
                 showMessage(

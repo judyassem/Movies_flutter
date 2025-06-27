@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:movies_app/model/movie_model.dart';
-
+import 'package:movies_app/models/movie_dm.dart';
+import '../../../api_manager/movies_api_manager.dart';
 import '../../../util/app_colors.dart';
 import '../../movie_details/movie_details.dart';
 
@@ -12,15 +12,32 @@ class HomeTab extends StatefulWidget {
 }
 
 class _HomeTabState extends State<HomeTab> {
+  var moviesList = MoviesApiManager().getMovies();
+
   @override
   Widget build(
     BuildContext context,
   ) {
+    return FutureBuilder<List<MovieDm>?>(
+        future: moviesList,
+        builder: (context, snapshot) {
+          if (snapshot.hasError) {
+            return Center(child: Text(snapshot.error.toString()));
+          } else if (snapshot.hasData) {
+            final movies = snapshot.data!;
+            return buildHome(movies);
+          } else {
+            return Center(child: CircularProgressIndicator());
+          }
+        });
+  }
+
+  Widget buildHome(List<MovieDm> movies) {
     return ListView(children: [
       Column(
         crossAxisAlignment: CrossAxisAlignment.center,
         children: [
-          const Row(),
+          //const Row(),
           Image.asset(
             "assets/0c5e9a732005a8c14492ae830b4da544d75cac19.png",
             fit: BoxFit.cover,
@@ -29,11 +46,11 @@ class _HomeTabState extends State<HomeTab> {
             height: MediaQuery.of(context).size.height * 0.5,
             child: ListView.builder(
               scrollDirection: Axis.horizontal,
-              itemCount: MovieModel.movies.length,
+              itemCount: movies.length,
               itemBuilder: (context, index) {
                 return Padding(
                   padding: const EdgeInsets.only(top: 5, left: 8, right: 8),
-                  child: buildMovieCard(index),
+                  child: buildMovieCard(movies[index]),
                 );
               },
             ),
@@ -79,11 +96,11 @@ class _HomeTabState extends State<HomeTab> {
             height: MediaQuery.of(context).size.height * 0.35,
             child: ListView.builder(
               scrollDirection: Axis.horizontal,
-              itemCount: MovieModel.movies.length,
+              itemCount: movies.length,
               itemBuilder: (context, index) {
                 return Padding(
                     padding: const EdgeInsets.all(8.0),
-                    child: buildMovieCard(index));
+                    child: buildMovieCard(movies[index]));
               },
             ),
           )
@@ -92,14 +109,14 @@ class _HomeTabState extends State<HomeTab> {
     ]);
   }
 
-  buildMovieCard(int index) {
-    final movie = MovieModel.movies[index];
+  buildMovieCard(MovieDm movie) {
+    //final movie = MovieModel.movies[index];
     return GestureDetector(
       onTap: () {
         Navigator.push(
           context,
           MaterialPageRoute(
-            builder: (_) => MovieDetails(movie: movie),
+            builder: (_) => MovieDetails(movieId: movie.id),
           ),
         );
       },
@@ -107,8 +124,8 @@ class _HomeTabState extends State<HomeTab> {
         children: [
           ClipRRect(
             borderRadius: BorderRadius.circular(20),
-            child: Image.asset(
-              MovieModel.movies[index].image,
+            child: Image.network(
+              movie.mediumCoverImage ?? " ",
               fit: BoxFit.cover,
             ),
           ),
@@ -125,7 +142,7 @@ class _HomeTabState extends State<HomeTab> {
                 crossAxisAlignment: CrossAxisAlignment.center,
                 children: [
                   Text(
-                    "${MovieModel.movies[index].rating}",
+                    "${movie.rating}",
                     style: TextStyle(
                         color: AppColors.white,
                         fontSize: 16,

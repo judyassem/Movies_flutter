@@ -2,13 +2,14 @@ import 'dart:convert';
 
 import 'package:flutter/material.dart';
 import 'package:movies_app/common%20_widget/filled_button.dart';
-import 'package:movies_app/screens_ui/login_screen/login_screen.dart';
 import 'package:movies_app/util/app_colors.dart';
 import 'package:movies_app/util/dailog_utils.dart';
 
-import '../../api_manager/api_manager.dart';
-import '../../common _widget/custometextfilled.dart';
-import '../../models/user_dm.dart';
+import '../../../api_manager/auth_api_manager.dart';
+import '../../../common _widget/custometextfilled.dart';
+import '../../../models/user_dm.dart';
+import '../login_screen/login_screen.dart';
+
 
 class RegisterScreen extends StatefulWidget {
   static String routeName = "RegisterScreen";
@@ -78,8 +79,8 @@ class _RegisterScreenState extends State<RegisterScreen> {
       );
   }
 
-  CustomeFilledButton buildCreateAccountButton() {
-    return CustomeFilledButton(
+  CustomFilledButton buildCreateAccountButton() {
+    return CustomFilledButton(
       onClick: () async {
         try {
           final name = nameController.text.trim();
@@ -120,7 +121,7 @@ class _RegisterScreenState extends State<RegisterScreen> {
 
           print("📤 Sending user: ${jsonEncode(user.toJson())}");
 
-          final response = await ApiManager().registerUser(user);
+          final response = await AuthApiManager().registerUser(user);
 
           hideLoading(context);
 

@@ -7,16 +7,15 @@ class RegisterUserResponse {
 
   RegisterUserResponse.fromJson(Map<String, dynamic> json) {
     message = json['message'];
-    data = json['data']; // != null ? UserDm.fromJson(json['data']) : null;
+    data = json['data'] != null ? UserDm.fromJson(json['data']) : null;
   }
   String? message;
-  Map<String,dynamic>? data;
+  UserDm? data;
 
   Map<String, dynamic> toJson() {
-    final map = <String, dynamic>{};
-    map['message'] = message;
-    map['data'] = data;
-    return map;
+    return {
+      'message': message,
+      'data': data?.toJson(),
+    };
   }
-
 }

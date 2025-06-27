@@ -20,6 +20,7 @@ class CustomTextField extends StatelessWidget {
         child: TextFormField(
           controller: controller,
           textAlign: TextAlign.justify,
+          style: TextStyle(color: AppColors.white),
           decoration: InputDecoration(
             focusedBorder: OutlineInputBorder(
                 borderRadius: BorderRadius.circular(15),
