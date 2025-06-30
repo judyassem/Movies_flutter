@@ -89,14 +89,22 @@ class _MovieDetailsState extends State<MovieDetails> {
           ),
           Row(
             children: [
-            IconButton(
-                    onPressed: (){Navigator.pop(context);},
-                    icon: Icon(Icons.arrow_back_ios_new , color: AppColors.white,)),
-            Spacer(),
-            IconButton(
-                    onPressed: (){},
-                    icon: Icon(Icons.bookmark_outlined , color: AppColors.white,))
-          ],
+              IconButton(
+                  onPressed: () {
+                    Navigator.pop(context);
+                  },
+                  icon: Icon(
+                    Icons.arrow_back_ios_new,
+                    color: AppColors.white,
+                  )),
+              Spacer(),
+              IconButton(
+                  onPressed: () {},
+                  icon: Icon(
+                    Icons.bookmark_outlined,
+                    color: AppColors.white,
+                  ))
+            ],
           ),
           Positioned(
             top: 300,
@@ -115,15 +123,19 @@ class _MovieDetailsState extends State<MovieDetails> {
                     maxLines: 2,
                     textAlign: TextAlign.center,
                     style: const TextStyle(
-                        color: Colors.white ,
-                        fontSize: 24,
-                        fontWeight: FontWeight.bold,)),
+                      color: Colors.white,
+                      fontSize: 24,
+                      fontWeight: FontWeight.bold,
+                    )),
               )),
           Positioned(
             bottom: 15,
             child: Text(movie.year.toString(),
                 textAlign: TextAlign.center,
-                style: TextStyle(color: Colors.grey, fontWeight: FontWeight.bold, fontSize: 20)),
+                style: TextStyle(
+                    color: Colors.grey,
+                    fontWeight: FontWeight.bold,
+                    fontSize: 20)),
           ),
         ],
       ),
@@ -135,7 +147,8 @@ class _MovieDetailsState extends State<MovieDetails> {
           onClick: () {}),
       Row(mainAxisAlignment: MainAxisAlignment.spaceEvenly, children: [
         Container(
-          decoration: BoxDecoration(color: Colors.grey[850] ,borderRadius: BorderRadius.circular(16)),
+          decoration: BoxDecoration(
+              color: Colors.grey[850], borderRadius: BorderRadius.circular(16)),
           padding: EdgeInsets.all(16),
           margin: EdgeInsets.all(8),
           child: Row(children: [
@@ -144,7 +157,9 @@ class _MovieDetailsState extends State<MovieDetails> {
               color: AppColors.yellow,
               size: 24,
             ),
-            SizedBox(width: 9,),
+            SizedBox(
+              width: 9,
+            ),
             Text(movie.rating.toString(),
                 style: TextStyle(
                     color: Colors.white,
@@ -153,7 +168,8 @@ class _MovieDetailsState extends State<MovieDetails> {
           ]),
         ),
         Container(
-          decoration: BoxDecoration(color: Colors.grey[850] ,borderRadius: BorderRadius.circular(16)),
+          decoration: BoxDecoration(
+              color: Colors.grey[850], borderRadius: BorderRadius.circular(16)),
           padding: EdgeInsets.all(16),
           margin: EdgeInsets.all(8),
           child: Row(children: [
@@ -162,7 +178,9 @@ class _MovieDetailsState extends State<MovieDetails> {
               color: AppColors.yellow,
               size: 24,
             ),
-            SizedBox(width: 9,),
+            SizedBox(
+              width: 9,
+            ),
             Text(movie.runtime.toString(),
                 style: TextStyle(
                     color: Colors.white,
@@ -171,7 +189,8 @@ class _MovieDetailsState extends State<MovieDetails> {
           ]),
         ),
         Container(
-          decoration: BoxDecoration(color: Colors.grey[850] ,borderRadius: BorderRadius.circular(16)),
+          decoration: BoxDecoration(
+              color: Colors.grey[850], borderRadius: BorderRadius.circular(16)),
           padding: EdgeInsets.all(16),
           margin: EdgeInsets.all(8),
           child: Row(children: [
@@ -180,7 +199,9 @@ class _MovieDetailsState extends State<MovieDetails> {
               color: AppColors.yellow,
               size: 24,
             ),
-            SizedBox(width: 9,),
+            SizedBox(
+              width: 9,
+            ),
             Text(movie.rating.toString(),
                 style: TextStyle(
                     color: Colors.white,
@@ -206,10 +227,10 @@ class _MovieDetailsState extends State<MovieDetails> {
   // }
 
   SectionTitle(String s) {
-    return Text(s ,
-      textAlign: TextAlign.start,
-      style: TextStyle(color: AppColors.white ,fontSize: 24, fontWeight: FontWeight.bold)
-    );
+    return Text(s,
+        textAlign: TextAlign.start,
+        style: TextStyle(
+            color: AppColors.white, fontSize: 24, fontWeight: FontWeight.bold));
   }
 
   CastList({required cast}) {}
@@ -220,14 +241,16 @@ class _MovieDetailsState extends State<MovieDetails> {
       child: Wrap(
         spacing: 8.0,
         runSpacing: 8.0,
-        children: genres.map((genre) => ElevatedButton(
-          onPressed: () {},
-          style: ElevatedButton.styleFrom(
-            backgroundColor: Colors.grey[850],
-            foregroundColor: Colors.white,
-          ),
-          child: Text(genre),
-        )).toList(),
+        children: genres
+            .map((genre) => ElevatedButton(
+                  onPressed: () {},
+                  style: ElevatedButton.styleFrom(
+                    backgroundColor: Colors.grey[850],
+                    foregroundColor: Colors.white,
+                  ),
+                  child: Text(genre),
+                ))
+            .toList(),
       ),
     );
   }
